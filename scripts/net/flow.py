@@ -189,7 +189,7 @@ def train(self):
 
     if ckpt: _save_ckpt(self, *args)
 
-def return_predict(self, im, imname=NONE): #only for testing images , imname):
+def return_predict(self, im, imname=None): #only for testing images , imname):
     assert isinstance(im, np.ndarray), \
 				'Image is not a np.ndarray'
     #_, h, w, _ = im.shape
@@ -305,7 +305,7 @@ def return_predict(self, im, imname=NONE): #only for testing images , imname):
         if (tmpBox[4] == 'traffic light') or (tmpBox[4] == 'car') or (tmpBox[4] == 'truck') or (tmpBox[4] == 'pedestrian') or (tmpBox[4] == 'cyclist'): #  in tmpBox[4]:
             cv2.rectangle(imgcv,(tmpBox[0], tmpBox[2]), (tmpBox[1], tmpBox[3]), colors[max_indx], thick)
             cv2.putText(imgcv, tmpBox[4], (tmpBox[0], tmpBox[2] - 12), 0, 1e-3 * h, colors[max_indx],thick//3)
-    if (imname is not NONE):        
+    if (imname is not None):        
         outfolder = './test/out/'
         img_name = os.path.join(outfolder, imname.split('/')[-1]) 
         print("writing file: {}".format(img_name))
