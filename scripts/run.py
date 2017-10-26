@@ -15,14 +15,15 @@ tfnet = TFNet(options)
 ####################################
 #read a video input file
 print("start to reading mp4 frames")
-if (sys.argv[1] is not NONE):
+if (sys.argv[1] is not None):
     vin = sys.argv[1] #'MOVI0019_1min32secto3min2sec.mp4'
     vout = '_'.join(['YOLO', vin])
     fname = '/'.join(['./test_videos', vin])
+    fOutname = '/'.join(['./test_videos', vout])
     print('video in file: {}'.format(vin))
     print('video out file: {}'.format(vout))
 
-    inFile = cv2.VideoCapture(vin) #'./test_videos/MOVI0019_1min32secto3min2sec.mp4')
+    inFile = cv2.VideoCapture(fname) #'./test_videos/MOVI0019_1min32secto3min2sec.mp4')
 
     #check if the input file opened successfully
     if (inFile.isOpened() == False):
@@ -33,7 +34,7 @@ if (sys.argv[1] is not NONE):
     frame_size = (int(inFile.get(3)), int(inFile.get(4)))    #tuple(result.shape[1::-1])
     print("frame_size: {}".format(frame_size))
     #writer = cv2.VideoWriter("./test_videos/YOLO_MOVI0019_1min32secto3min2sec.mp4", cv2.VideoWriter_fourcc(*'MP4V'), fps, frame_size, True)  
-     writer = cv2.VideoWriter(vout,
+    writer = cv2.VideoWriter(fOutname,
          cv2.VideoWriter_fourcc(*'MP4V'), fps, frame_size, True)  
 
     #read until video is completed
