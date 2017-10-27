@@ -1,0 +1,6 @@
+python run.py "MOVI0017_1min32secto3min2sec.mp4"
+python run.py "MOVI0017_1secto1min31sec.mp4"
+python run.py "MOVI0018_1min32secto3min2sec.mp4"
+python run.py "MOVI0018_1secto1min31sec.mp4"
+python run.py "MOVI0019_1min32secto3min2sec.mp4"
+python run.py "MOVI0019_1secto1min31sec.mp4"
