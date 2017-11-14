@@ -66,7 +66,7 @@ def get_light_color(imgbox, imgo, tmpBox, lower_HSV, upper_HSV):
     top_y = tmpBox[2] 
     right_x = tmpBox[1] 
     bot_y = tmpBox[3]
-    print("left_x: {}, top_y:  {}, right_x: {}, bot_y: {}".format(left_x, top_y, right_x, bot_y))
+    #print("left_x: {}, top_y:  {}, right_x: {}, bot_y: {}".format(left_x, top_y, right_x, bot_y))
     pts = np.array([[left_x, top_y], [right_x, top_y], [right_x, bot_y], [left_x, bot_y]])
     cv2.fillPoly(polygon_img, pts=[pts], color=(255,255,255))
     res1 = cv2.bitwise_and(res,res,mask=polygon_img[:,:,1])
@@ -204,6 +204,7 @@ def return_predict(self, im, imname=None): #only for testing images , imname):
     out = self.sess.run(self.out, feed_dict)[0]
     boxes = self.framework.findboxes(out)
     threshold = self.FLAGS.threshold
+    print("threshold: {}".format(threshold))
     boxesInfo = list()
 
     # meta
@@ -303,6 +304,7 @@ def return_predict(self, im, imname=None): #only for testing images , imname):
             imgcv = result        
 
             ###################################################################################
+        
         if (tmpBox[4] == 'traffic light') or (tmpBox[4] == 'car') or (tmpBox[4] == 'truck') or (tmpBox[4] == 'pedestrian') or (tmpBox[4] == 'cyclist'): #  in tmpBox[4]:
             cv2.rectangle(imgcv,(tmpBox[0], tmpBox[2]), (tmpBox[1], tmpBox[3]), colors[max_indx], thick)
             cv2.putText(imgcv, tmpBox[4], (tmpBox[0], tmpBox[2] - 12), 0, 1e-3 * h, colors[max_indx],thick//3)
