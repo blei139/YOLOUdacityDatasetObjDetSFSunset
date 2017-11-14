@@ -14,8 +14,30 @@ tfnet = TFNet(options)
 
 ####################################
 #read a video input file
-print("start to reading mp4 frames")
-if (sys.argv[1] is not None):
+
+if (sys.argv[1] == "testing"): #if just for testing purpose, not video purpose
+    images = glob.glob('test/*.jpg')
+    i = 0
+
+    average = []
+    for image in images:
+        t = time.time()
+
+        imgcv = cv2.imread(image)
+        name = image
+        result, boxInfo = tfnet.return_predict(imgcv,name)
+
+        plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
+        plt.show()
+        
+        t2 = time.time()
+        average.append(t2-t)
+        i += 1
+        print(i,'time1:',(t2-t))
+    final = np.mean(average)
+    print(i,'images processed in avg: ', round(final,6), 'seconds per image')
+elif (sys.argv[1] is not None):
+    print("start to reading mp4 frames")
     vin = sys.argv[1] #'MOVI0019_1min32secto3min2sec.mp4'
     vout = '_'.join(['YOLO', vin])
     fname = '/'.join(['./test_videos', vin])
@@ -57,20 +79,4 @@ if (sys.argv[1] is not None):
             print("end of mp4 video file conversion") 
             break
 #####################################
-else: #if just for testing purpose, not video purpose
-    images = glob.glob('./test/*.jpg')
-    i = 0
-    average = []
-    for image in images:
-        t = time.time()
-        imgcv = cv2.imread(image)
-        name = image
-        result, boxInfo = tfnet.return_predict(imgcv,name)
-        plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
-        plt.show()
-        t2 = time.time()
-        average.append(t2-t)
-        i += 1
-        print(i,'time1:',(t2-t))
-    final = np.mean(average)
-    print(i,'images processed in avg: ', round(final,6), 'seconds per image')
+
