@@ -66,7 +66,7 @@ def get_light_color(imgbox, imgo, tmpBox, lower_HSV, upper_HSV):
     top_y = tmpBox[2] 
     right_x = tmpBox[1] 
     bot_y = tmpBox[3]
-    #print("left_x: {}, top_y:  {}, right_x: {}, bot_y: {}".format(left_x, top_y, right_x, bot_y))
+    print("left_x: {}, top_y:  {}, right_x: {}, bot_y: {}".format(left_x, top_y, right_x, bot_y))
     pts = np.array([[left_x, top_y], [right_x, top_y], [right_x, bot_y], [left_x, bot_y]])
     cv2.fillPoly(polygon_img, pts=[pts], color=(255,255,255))
     res1 = cv2.bitwise_and(res,res,mask=polygon_img[:,:,1])
@@ -103,8 +103,9 @@ def get_light_color(imgbox, imgo, tmpBox, lower_HSV, upper_HSV):
     lowerYellowy = bot_y - (bot_y - top_y)/3
     #print("Average height of traffic light: {}".format((bot_y - top_y)/3))
     #print("Width of the traffic light: {}".format(right_x - left_x))
-    #print("Ratio of average height over width: {}".format((bot_y - top_y)/(3*(right_x - left_x))))
-    avgHWratio = (bot_y - top_y)/(3*(right_x - left_x))
+    #print("Ratio of average height over width: {}".format((bot_y - top_y)/(3.0*(right_x - left_x))))
+    avgHWratio = (bot_y - top_y)/(3.0*(right_x - left_x))
+    #print("avgHWratio: {}".format(avgHWratio))
     #print("top_y: {}, upperYellowy: {}, lowerYellowy: {}, bot_y:{}".format(top_y, upperYellowy, lowerYellowy, bot_y))
     #put the original image back
     img = imgOrig
